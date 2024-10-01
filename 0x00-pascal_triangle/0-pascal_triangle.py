@@ -29,7 +29,7 @@ def pascal_triangle(n):
     if n == 2:
         return result
 
-    def pascal_triangle_hepler(result, n):
+    def pascal_triangle_helper(result, n):
         """recursive function for pascal triangulation"""
         if len(result) == n:
             return result
@@ -44,6 +44,6 @@ def pascal_triangle(n):
                 new.append(1)
                 new_result.append(new)
                 break
-        return pascal_triangle_hepler(result, n)
+        return pascal_triangle_helper(result, n)
 
-    return pascal_triangle_hepler(result, n)
+    return pascal_triangle_helper(result, n)
