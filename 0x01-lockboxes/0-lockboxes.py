@@ -20,7 +20,7 @@ def canUnlockAll(boxes):
     if boxes[0] == [] and len(boxes) > 1:
         return False
 
-    if boxes[0] == [] and len(boxes) == 1:
+    if len(boxes) == 1:
         return True
 
     def unlock_all(boxes, box_index):
@@ -38,19 +38,26 @@ def canUnlockAll(boxes):
 
     unlock_all(boxes, 0)
 
-    if answer == keys_set:
-        return True
-    return False
+    return answer == keys_set
 
 
 # boxes = [[1], [2], [3], [4], []]
+# boxes = [[1], [2], [3], [4], [5], []]
 # boxes = [[1, 4], [2], [0, 4, 1], [3], [], [4, 1], [5, 6]]
 # boxes = [[1, 4, 6], [2], [0, 4, 1], [5, 6, 2], [3], [4, 1], [6]]
 # boxes = [[1], [2], [3, 5], [4], [7], []]
 # boxes = [[1], [2], [], [4]]
 # boxes = [[1], [2], [100], []]
 # boxes = [[], [0, 1, 2], [1, 22, 3], []]
-
+# boxes = [[1], [3], [2], []]  # Should return False
+# boxes = [[]]  # Should return True
+# boxes = [[]]  # Should return True
+# boxes = [[1], []]  # Should return True
+# boxes = [[], [0]]  # Should return True
+# boxes = [[1, 2], [3], [], [4], []]
+# boxes = [[0], []]  # Should return False
+# boxes = [[1, 1, 1], [2], [3], []]  # Should return True
+# boxes = [[], [1], [2], []]  # Returns False
 # print(canUnlockAll(boxes))
 
 """
