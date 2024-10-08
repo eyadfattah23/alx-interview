@@ -17,6 +17,9 @@ def canUnlockAll(boxes):
     keys_set.add(0)
     answer = set(list(range(len(boxes))))
 
+    if not boxes:
+        return False
+
     if boxes[0] == [] and len(boxes) > 1:
         return False
 
