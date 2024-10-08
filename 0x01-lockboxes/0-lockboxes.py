@@ -17,8 +17,11 @@ def canUnlockAll(boxes):
     keys_set.add(0)
     answer = set(list(range(len(boxes))))
 
-    if boxes[0] == []:
+    if boxes[0] == [] and len(boxes) > 1:
         return False
+
+    if boxes[0] == [] and len(boxes) == 1:
+        return True
 
     def unlock_all(boxes, box_index):
         """helper function to unlock all boxes passed from canUnlockAll
@@ -39,6 +42,12 @@ def canUnlockAll(boxes):
         return True
     return False
 
+
+# boxes = [[1], [2], [], [4]]
+# boxes = [[1], [2], [100], []]
+boxes = [[]]
+
+print(canUnlockAll(boxes))
 
 """
 
