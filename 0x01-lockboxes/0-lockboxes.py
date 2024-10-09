@@ -54,13 +54,17 @@ def canUnlockAll(boxes):
 # boxes = [[], [0, 1, 2], [1, 22, 3], []]
 # boxes = [[1], [3], [2], []]  # Should return False
 # boxes = [[]]  # Should return True
-# boxes = [[]]  # Should return True
+# boxes = []  # Should return True
 # boxes = [[1], []]  # Should return True
-# boxes = [[], [0]]  # Should return True
+# boxes = [[], [0]]  # Should return False
 # boxes = [[1, 2], [3], [], [4], []]
 # boxes = [[0], []]  # Should return False
+# boxes = [[0], [0, 2], [3], []]  # Should return False
+# boxes = [[5, 4], [3], [], [2], [1], []]
+
 # boxes = [[1, 1, 1], [2], [3], []]  # Should return True
 # boxes = [[], [1], [2], []]  # Returns False
+# boxes = [[1, 3], [2], [], []]
 # print(canUnlockAll(boxes))
 
 """
