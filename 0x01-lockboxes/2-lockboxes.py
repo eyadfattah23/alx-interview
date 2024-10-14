@@ -13,27 +13,40 @@ def canUnlockAll(boxes):
     Returns:
         boolean: True if all boxes can be opened, else return False
     """
-
     keys_set = set()
     keys_set.add(0)
     answer = set(list(range(len(boxes))))
-    stack = [0]
 
-    n = len(boxes)
+    if not boxes:
+        return False
 
-    while stack:
-        box_idx = stack.pop()
-        for key in boxes[box_idx]:
-            if key not in keys_set and (0 < key < n):
+    if boxes[0] == [] and len(boxes) > 1:
+        return False
+
+    if len(boxes) == 1:
+        return True
+
+    def unlock_all(boxes, box_index):
+        """helper function to unlock all boxes passed from canUnlockAll
+
+        Args:
+            boxes (list of lists): locked boxes
+            box_index (+ve integer): the index of the box that will be opened
+                                    (key of the list)
+        """
+        for key in boxes[box_index]:
+            if (key not in keys_set) and (not key >= len(boxes)):
                 keys_set.add(key)
-                stack.append(key)
+                unlock_all(boxes, key)
+
+    unlock_all(boxes, 0)
 
     return answer == keys_set
 
 
-# boxes = [[1], [2], [3], [4], []] #true
-# boxes = [[1], [2], [3], [4], [5], []]  # True
-# boxes = [[1, 4], [2], [0, 4, 1], [3], [], [4, 1], [5, 6]]  # false
+# boxes = [[1], [2], [3], [4], []]
+# boxes = [[1], [2], [3], [4], [5], []]
+# boxes = [[1, 4], [2], [0, 4, 1], [3], [], [4, 1], [5, 6]]
 # boxes = [[1, 4, 6], [2], [0, 4, 1], [5, 6, 2], [3], [4, 1], [6]]
 # boxes = [[1], [2], [3, 5], [4], [7], []]
 # boxes = [[1], [2], [], [4]]
@@ -49,8 +62,12 @@ def canUnlockAll(boxes):
 # boxes = [[0], [0, 2], [3], []]  # Should return False
 # boxes = [[5, 4], [3], [], [2], [1], []]
 
-
 # boxes = [[1, 1, 1], [2], [3], []]  # Should return True
 # boxes = [[], [1], [2], []]  # Returns False
 # boxes = [[1, 3], [2], [], []]
 # print(canUnlockAll(boxes))
+
+"""
+
+print(canUnlockAll(boxes))
+ """
