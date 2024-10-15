@@ -28,7 +28,7 @@ def minOperations(n):
         n (int): number of 'H' characters.
     """
 
-    if n == 0:
+    if n <= 0:
         return 0
     n_prime_factors = []
 
