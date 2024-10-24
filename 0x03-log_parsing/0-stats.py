@@ -10,7 +10,7 @@ It calculates:
 
 
 import re
-import signal
+import time
 import sys
 import datetime
 
@@ -33,7 +33,7 @@ def print_status_codes():
     Print status codes and their counts in ascending order.
     """
 
-    for key, value in status_codes.items():
+    for key, value in sorted(status_codes.items()):
         if value > 0:
             print("{}: {}".format(key, value))
 
