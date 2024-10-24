@@ -35,7 +35,7 @@ def print_status_codes():
 
     for key, value in status_codes.items():
         if value > 0:
-            print(f'{key}: {value}')
+            print("{}: {}".format(key, value))
 
 
 def match_parse_line(line):
@@ -99,7 +99,7 @@ try:
             Total_files_size += parsed_line.get('file_size')
             status_codes[parsed_line.get('status_code')] += 1
             if counter % 10 == 0:
-                print(f'File size: {Total_files_size}')
+                print('File size: {}'.format(Total_files_size))
                 print_status_codes()
             counter += 1
 except KeyboardInterrupt:
