@@ -83,7 +83,7 @@ def match_parse_line(line):
     return False
 
 
-""" 
+"""
 def interrupt_handler(signum, frame):
     print(f'File size: {Total_files_size}')
     print_status_codes()
@@ -105,3 +105,4 @@ try:
 except KeyboardInterrupt:
     print(f'File size: {Total_files_size}')
     print_status_codes()
+    raise
