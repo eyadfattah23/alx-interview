@@ -83,24 +83,25 @@ def match_parse_line(line):
     return False
 
 
+""" 
 def interrupt_handler(signum, frame):
-    """
-    Signal handler for SIGINT (Ctrl + C) to print final metrics.
-    """
     print(f'File size: {Total_files_size}')
     print_status_codes()
 
 
-signal.signal(signal.SIGINT, interrupt_handler)
+signal.signal(signal.SIGINT, interrupt_handler) """
 
+try:
+    for line in sys.stdin:
+        parsed_line = match_parse_line(line)
 
-for line in sys.stdin:
-    parsed_line = match_parse_line(line)
-
-    if parsed_line:
-        Total_files_size += parsed_line.get('file_size')
-        status_codes[parsed_line.get('status_code')] += 1
-        if counter % 10 == 0:
-            print(f'File size: {Total_files_size}')
-            print_status_codes()
-        counter += 1
+        if parsed_line:
+            Total_files_size += parsed_line.get('file_size')
+            status_codes[parsed_line.get('status_code')] += 1
+            if counter % 10 == 0:
+                print(f'File size: {Total_files_size}')
+                print_status_codes()
+            counter += 1
+except KeyboardInterrupt:
+    print(f'File size: {Total_files_size}')
+    print_status_codes()
