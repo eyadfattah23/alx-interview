@@ -25,17 +25,14 @@ status_codes = {
     500: 0,
 }
 counter = 1
-Total_files_size = 0
+total_files_size = 0
 
 
 def print_status_codes():
-    """
-    Print status codes and their counts in ascending order.
-    """
-
-    for key, value in sorted(status_codes.items()):
-        if value > 0:
-            print("{}: {}".format(key, value))
+    """Print the status codes in sorted order."""
+    for code in sorted(status_codes.keys()):
+        if status_codes[code] > 0:
+            print(f"{code}: {status_codes[code]}")
 
 
 def match_parse_line(line):
@@ -62,9 +59,6 @@ def match_parse_line(line):
 
     if re_obj:
         try:
-            date_str = datetime.datetime.strptime(
-                re_obj.group('date'), '%Y-%m-%d %H:%M:%S.%f')
-
             status_code = int(re_obj.group('status_code'))
             if status_code not in status_codes:
                 return False
@@ -73,7 +67,7 @@ def match_parse_line(line):
         try:
             return {
                 'ip': re_obj.group('ip'),
-                'date': date_str,
+                'date': re_obj.group('date'),
                 'status_code': status_code,
                 'file_size': int(re_obj.group('file_size')),
             }
@@ -96,13 +90,16 @@ try:
         parsed_line = match_parse_line(line)
 
         if parsed_line:
-            Total_files_size += parsed_line.get('file_size')
+            total_files_size += parsed_line.get('file_size')
             status_codes[parsed_line.get('status_code')] += 1
             if counter % 10 == 0:
-                print('File size: {}'.format(Total_files_size))
+                print('File size: {}'.format(total_files_size))
                 print_status_codes()
             counter += 1
+
+    print(f'File size: {total_files_size}')
+    print_status_codes()
 except KeyboardInterrupt:
-    print(f'File size: {Total_files_size}')
+    print(f'File size: {total_files_size}')
     print_status_codes()
     raise
