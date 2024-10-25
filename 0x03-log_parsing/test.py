@@ -15,14 +15,14 @@ import sys
 import datetime
 
 status_codes = {
-    "200": 0,
-    "301": 0,
-    "400": 0,
-    "401": 0,
-    "403": 0,
-    "404": 0,
-    "405": 0,
-    "500": 0,
+    200: 0,
+    301: 0,
+    400: 0,
+    401: 0,
+    403: 0,
+    404: 0,
+    405: 0,
+    500: 0,
 }
 counter = 1
 total_files_size = 0
@@ -51,15 +51,15 @@ def match_parse_line(line):
         return False
 
     # Regular expression pattern for log entry
-    pattern = (r"^(?P<ip>.+\s*-\s*\[(?P<date>.+)\]\s*"
-               r"\"GET /projects/260 HTTP/1.1\" "
+    pattern = (r"^(?P<ip>.+)\s*-\s*\[(?P<date>.+)\] "
+               r"\"GET \/projects\/260 HTTP\/1\.1\" "
                r"(?P<status_code>\d{3}) (?P<file_size>\d+)$")
 
     re_obj = re.match(pattern, line)
 
     if re_obj:
         try:
-            status_code = re_obj.group('status_code')
+            status_code = int(re_obj.group('status_code'))
             if status_code not in status_codes:
                 return False
         except ValueError as VE:
