@@ -14,7 +14,7 @@ def to_binary(number: int) -> str:
     Returns:
         str: binary representation of the given number
     """
-    return "{:08b}".format(number)
+    return "{:08b}".format(number)[-8:]
 
 
 def count_char_bytes(number: str) -> int:
@@ -52,7 +52,7 @@ def validUTF8(data: List[int]) -> bool:
             else False
     """
     if not data:
-        return False
+        return True
 
     def check_next_bytes(curr_char_idx: int, n_bytes: int) -> bool:
         """check the validity of the next number of bytes of the
