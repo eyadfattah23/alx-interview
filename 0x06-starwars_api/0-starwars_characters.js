@@ -1,26 +1,44 @@
 #!/usr/bin/node
 
-const request = require('request-promise-native');
+const request = require('request');
 
 const filmNum = process.argv[2];
 const mainURL = 'https://swapi-api.alx-tools.com/api/films/';
 
-async function printCharacters () {
-  try {
-    const film = await request(`${mainURL}${filmNum}`);
-    const filmCharacters = JSON.parse(film).characters;
-
-    for (const characterURL of filmCharacters) {
-      try {
-        const characterData = await request(characterURL);
-        console.log(JSON.parse(characterData).name);
-      } catch (error) {
-        console.error('Error fetching character:', error.message);
-      }
+new Promise((resolve, reject) => {
+  request(mainURL + filmNum, function (error, response, body) {
+    if (error) {
+      reject(error);
+      return;
     }
-  } catch (error) {
-    console.error('Error fetching film:', error.message);
-  }
-}
+    try {
+      resolve(JSON.parse(body).characters);
+    } catch (error) {
+      reject(error);
+    }
+  });
+}).then(
+  (URLs) => {
+    const names = [];
 
-printCharacters();
+    for (const url of URLs) {
+      names.push(new Promise((resolve, reject) => {
+        request(url, (err, resp, body) => {
+          if (err) {
+            reject(err);
+            return;
+          }
+          try {
+            resolve(JSON.parse(body).name);
+          } catch (err) {
+            reject(err);
+          }
+        });
+      }));
+    }
+    Promise.all(names).then((res) => {
+      res.forEach((name) => console.log(name));
+    }); // returns the result in order regardless of the time
+  },
+  (Err) => console.log(Err)
+);
