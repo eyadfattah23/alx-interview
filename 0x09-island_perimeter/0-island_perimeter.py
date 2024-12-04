@@ -1,9 +1,9 @@
 #!/usr/bin/python3
-""" a function calculates the perimeter of the island described in a grid"""
+"""Define a function calculates the perimeter of the island described in a grid"""
 
 
 def island_perimeter(grid):
-    """ returns the perimeter of an island
+    """returns the perimeter of an island
 
     Args:
         grid (list of list of integers): the island
