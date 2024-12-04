@@ -15,18 +15,16 @@ def island_perimeter(grid):
             if grid[row][col] == 1:
                 zone_perimeter = 4
 
-                if row + 1 >= len(grid) or row == 0:
+                if col - 1 >= 0 and grid[row][col-1] == 1:
                     zone_perimeter -= 1
 
-                if col + 1 >= len(grid[row]) or col == 0:
+                if row - 1 >= 0 and grid[row-1][col] == 1:
                     zone_perimeter -= 1
 
-                if col - 1 >= 0 and grid[row][col-1] == 1 \
-                        or row - 1 >= 0 and grid[row-1][col] == 1:
+                if col + 1 < len(grid[row]) and grid[row][col+1] == 1:
                     zone_perimeter -= 1
 
-                if col + 1 < len(grid[row]) and grid[row][col+1] == 1\
-                        or row + 1 < len(grid) and grid[row+1][col] == 1:
+                if row + 1 < len(grid) and grid[row+1][col] == 1:
                     zone_perimeter -= 1
 
                 total_perimeter += zone_perimeter
