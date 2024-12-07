@@ -99,7 +99,6 @@ def makeChange2(coins, total):
     return result if result != float('inf') else -1
 
 
-#!/usr/bin/python3
 """
 Making Change
 """
