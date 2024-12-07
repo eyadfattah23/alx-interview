@@ -80,7 +80,7 @@ def make_change2(coins, total, coin_idx=0, memo=None):
     return res
 
 
-def makeChange(coins, total):
+def makeChange2(coins, total):
     """Calculates the minimum number of coins needed to make a given total.
 
     Args:
@@ -99,6 +99,48 @@ def makeChange(coins, total):
     return result if result != float('inf') else -1
 
 
+#!/usr/bin/python3
+"""
+Making Change
+"""
+
+
+def makeChange(coins, total):
+    """Calculates the minimum number of coins needed to make a given total.
+
+    Args:
+        coins: A list of coin denominations.
+        total: The target total amount.
+
+    Returns:
+        The minimum number of coins needed to reach the total,
+            or -1 if it's impossible.
+    """
+    if coins is None or coins == []:
+        return -1
+    if total <= 0:
+        return 0
+    if total in coins:
+        return 1
+
+    coins.sort(reverse=True)
+    coins_num = 0
+    for coin in coins:
+        if total % coin == 0:
+            coins_num = coins_num + int(total / coin)
+            return coins_num
+        if total - coin >= 0:
+            if int(total / coin) <= 1:
+                coins_num += 1
+                total -= coin
+                if total == 0:
+                    break
+            else:
+                coins_num += int(total / coin)
+                total %= coin
+    if total > 0:
+        return -1
+    return coins_num
 # Example usage:
 # print(make_change2([5, 2, 1], 11))
 # print(coin_dp([5, 4, 3, 7], 7))
