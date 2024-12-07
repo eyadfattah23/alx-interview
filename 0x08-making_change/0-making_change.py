@@ -52,8 +52,8 @@ def make_change2(coins, total, coin_idx=0, memo=None):
     if not memo:
         memo = {}
 
-    if f"{total},{coin_idx}" in memo:
-        return memo[f"{total},{coin_idx}"]
+    if "{},{}".format(total, coin_idx) in memo:
+        return memo["{},{}".format(total, coin_idx)]
 
     if total in coins:
         return 1
@@ -75,7 +75,7 @@ def make_change2(coins, total, coin_idx=0, memo=None):
         remainder2 = make_change2(coins, total, coin_idx + 1, memo)
         res = min(remainder1, remainder2)
 
-    memo[f"{total},{coin_idx}"] = res
+    memo["{},{}".format(total, coin_idx)] = res
     return res
 
 
