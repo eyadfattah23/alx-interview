@@ -99,11 +99,6 @@ def makeChange2(coins, total):
     return result if result != float('inf') else -1
 
 
-"""
-Making Change
-"""
-
-
 def makeChange(coins, total):
     """Calculates the minimum number of coins needed to make a given total.
 
