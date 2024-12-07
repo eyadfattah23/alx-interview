@@ -49,13 +49,14 @@ def make_change2(coins, total, coin_idx=0, memo=None):
         Returns float('inf')
             if it's impossible to reach the total with given coins
     """
-    if not memo:
+    if memo is None:
         memo = {}
 
-    if "{},{}".format(total, coin_idx) in memo:
-        return memo["{},{}".format(total, coin_idx)]
+    if (total, coin_idx) in memo:
+        return memo[(total, coin_idx)]
 
     if total in coins:
+        memo[(total, coin_idx)] = 1
         return 1
 
     if total == 0:
@@ -75,7 +76,7 @@ def make_change2(coins, total, coin_idx=0, memo=None):
         remainder2 = make_change2(coins, total, coin_idx + 1, memo)
         res = min(remainder1, remainder2)
 
-    memo["{},{}".format(total, coin_idx)] = res
+    memo[(total, coin_idx)] = res
     return res
 
 
@@ -93,11 +94,13 @@ def makeChange(coins, total):
     if len(coins) == 1 and total not in coins:
         return -1
 
+    coins.sort(reverse=True)
     result = make_change2(coins, total, 0)
     return result if result != float('inf') else -1
 
+
 # Example usage:
-# print(make_change([5, 2, 1], 11))
+# print(make_change2([5, 2, 1], 11))
 # print(coin_dp([5, 4, 3, 7], 7))
 # print(make_change([7, 4, 3, 5], 7))
 # print(coin_dp([25, 2, 1], 37))
@@ -109,3 +112,4 @@ def makeChange(coins, total):
 # print(make_change2([1, 4, 3, 7], 7))
 # print(make_change([2], 3))
 # print(make_change([1], 1))
+# print(makeChange([3, 7, 405, 436], 8839))
