@@ -52,7 +52,7 @@ def create_dict_of_status(list):
     return result
 
 
-def isWinner(x, nums):
+def isWinner_brute(x, nums):
     """#+
     Determines the winner of a game between Maria and Ben
         based on the given list of numbers.#+
@@ -75,7 +75,7 @@ def isWinner(x, nums):
                 Ben_Total += 1
             else:
                 Maria_Total += 1
-                continue
+            continue
         round_list = list(range(1, nums[round] + 1))
         turn = 1
         ben = 0
@@ -110,11 +110,95 @@ def isWinner(x, nums):
     return None
 
 
+def SieveOfEratosthenes(n):
+    '''Create a boolean array
+    "prime[0..n]" and initialize
+     all entries it as true.
+    A value in prime[i] will
+    finally be false if i is
+    Not a prime, else true.'''
+
+    primes = []
+    prime = [True for i in range(n+1)]
+    p = 2
+    while (p * p <= n):
+
+        # If prime[p] is not
+        # changed, then it is a prime
+        if (prime[p] is True):
+
+            # Update all multiples of p
+            for i in range(p * p, n+1, p):
+                prime[i] = False
+        p += 1
+    for p in range(2, n+1):
+        if prime[p]:
+            primes.append(p)
+    return primes
+
+
+def isWinner(x, nums):
+    """#+
+    Determines the winner of a game between Maria and Ben
+        based on the given list of numbers.#+
+#+
+    Parameters:#+
+    x (int): An unused parameter.#+
+    nums (list of +ve ints): the number of elements in each round.#+
+#+
+    Returns:#+
+    str: The name of the winner ("Ben" or "Maria").#+
+    """  # +
+    Maria_Total = 0
+    Ben_Total = 0
+    game_results = {}
+    for round in range(x):
+        if nums[round] in game_results:
+            winner = game_results[nums[round]]
+            if winner == 'B':
+                Ben_Total += 1
+            else:
+                Maria_Total += 1
+            continue
+        primes = SieveOfEratosthenes(nums[round])
+
+        if len(primes) % 2 == 0:
+            game_results[nums[round]] = 'B'
+            Ben_Total += 1
+        else:
+            game_results[nums[round]] = 'M'
+            Maria_Total += 1
+
+    if Ben_Total > Maria_Total:
+        return "Ben"
+    elif Maria_Total > Ben_Total:
+        return "Maria"
+    return None
+
+
 """ print("Winner: {}".format(isWinner(5, [2, 5, 1, 4, 3])))
 
 print(get_next_prime_in_list(4, [1, 2, 3, 4, 5, 6, 7]))
 print(get_all_divisables(2, 8)) """
+""" print(isWinner(2, [1, 2]))
+print(isWinner_brute(2, [1, 2]))
+# print("Winner: {}".format(isWinner_brute(100, list(range(1, 101)))))
+print("Winner: {}".format(isWinner_brute(
+    10, [5, 5, 5, 5, 5, 2, 2, 2, 2, 2])))
+print("Winner: {}".format(isWinner_brute(5, [2, 5, 1, 4, 3])))
+print("Winner: {}".format(isWinner_brute(
+    10, [5, 5, 5, 5, 5, 2, 2, 2, 2, 2])))
+print()
 
-# print("Winner: {}".format(isWinner(10, [5, 5, 5, 5, 5, 2, 2, 2, 2, 2])))
-# print("Winner: {}".format(isWinner(5, [2, 5, 1, 4, 3])))
-# print("Winner: {}".format(isWinner(10, [5, 5, 5, 5, 5, 2, 2, 2, 2, 2])))
+print("Winner: {}".format(isWinner(100, list(range(1, 101)))))
+print("Winner: {}".format(isWinner(
+    10, [5, 5, 5, 5, 5, 2, 2, 2, 2, 2])))
+print("Winner: {}".format(isWinner(5, [2, 5, 1, 4, 3])))
+print("Winner: {}".format(isWinner(
+    10, [5, 5, 5, 5, 5, 2, 2, 2, 2, 2]))) """
+# print("Winner: {}".format(isWinner_brute_force(100, list(range(1, 101)))))
+# print("Winner: {}".format(isWinner_brute_force(
+#     10, [5, 5, 5, 5, 5, 2, 2, 2, 2, 2])))
+# print("Winner: {}".format(isWinner_brute_force(5, [2, 5, 1, 4, 3])))
+# print("Winner: {}".format(isWinner_brute_force(
+#     10, [5, 5, 5, 5, 5, 2, 2, 2, 2, 2])))
