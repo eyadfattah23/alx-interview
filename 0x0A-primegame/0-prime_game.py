@@ -68,7 +68,7 @@ def isWinner(x, nums):
     Ben_Total = 0
     game_results = {}
 
-    for round in range(len(nums)):
+    for round in range(x):
         if round in game_results:
             winner = game_results[round]
             if winner == 'B':
@@ -105,7 +105,9 @@ def isWinner(x, nums):
 
     if Ben_Total > Maria_Total:
         return "Ben"
-    return "Maria"
+    elif Maria_Total > Ben_Total:
+        return "Maria"
+    return None
 
 
 """ print("Winner: {}".format(isWinner(5, [2, 5, 1, 4, 3])))
@@ -113,6 +115,6 @@ def isWinner(x, nums):
 print(get_next_prime_in_list(4, [1, 2, 3, 4, 5, 6, 7]))
 print(get_all_divisables(2, 8)) """
 
-# print("Winner: {}".format(isWinner(10, [5, 5, 5, 5, 5, 2, 2, 2, 2, 2])))
-# print("Winner: {}".format(isWinner(5, [2, 5, 1, 4, 3])))
-# print("Winner: {}".format(isWinner(10, [5, 5, 5, 5, 5, 2, 2, 2, 2, 2])))
+print("Winner: {}".format(isWinner(10, [5, 5, 5, 5, 5, 2, 2, 2, 2, 2])))
+print("Winner: {}".format(isWinner(5, [2, 5, 1, 4, 3])))
+print("Winner: {}".format(isWinner(10, [5, 5, 5, 5, 5, 2, 2, 2, 2, 2])))
