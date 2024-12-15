@@ -102,7 +102,7 @@ def isWinner(x, nums):
     return "Maria"
 
 
-print("Winner: {}".format(isWinner(5, [2, 5, 1, 4, 3])))
+""" print("Winner: {}".format(isWinner(5, [2, 5, 1, 4, 3])))
 
 print(get_next_prime_in_list(4, [1, 2, 3, 4, 5, 6, 7]))
-print(get_all_divisables(2, 8))
+print(get_all_divisables(2, 8)) """
